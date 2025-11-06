@@ -32,7 +32,7 @@ jobs:
       - name: Build, tag, and push image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: my-docker-repo   # change to your repo
+          ECR_REPOSITORY: newuser-repo-123 # change to your repo
           IMAGE_TAG: latest
         run: |
           docker build -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" .
