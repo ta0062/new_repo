@@ -40,4 +40,4 @@ jobs:
 
       - name: Image URI
         run: |
-          echo "Pushed image: ${{ steps.login-ecr.outputs.registry }}/my-docker-repo:latest"
+          echo "Pushed image: ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest"
