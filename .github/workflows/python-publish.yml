@@ -3,7 +3,7 @@ name: Build and Push to ECR
 on:
   push:
     branches:
-      - main   # Trigger when code is pushed to main branch
+      - main  # Trigger when code is pushed to main branch
 
 jobs:
   build-and-push:
@@ -36,7 +36,7 @@ jobs:
       - name: Build, tag, and push image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: my-docker-repo     # change this to your ECR repo name
+          ECR_REPOSITORY: my-docker-repo  # change this to your ECR repo name
           IMAGE_TAG: latest
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -45,4 +45,3 @@ jobs:
       # Optional: Print image URL
       - name: Image URI
         run: echo "Pushed image: ${{ steps.login-ecr.outputs.registry }}/my-docker-repo:latest"
-
