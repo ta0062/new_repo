@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
-RUN pip install --no-cache-dir boto3 psycopg2-binary
+RUN pip install boto3 psycopg2-binary
 
 # Default command
 CMD ["python", "db.py"]
