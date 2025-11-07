@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy all files
 COPY . .
 
+RUN pip install boto3
 # Install dependencies (if any)
 # RUN pip install -r requirements.txt
 
