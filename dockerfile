@@ -10,12 +10,16 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy your code
+# Copy your code into the container
 COPY . .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir boto3 psycopg2-binary
+    && pip install --no-cache-dir \
+        boto3 \
+        psycopg2-binary \
+        watchdog
 
-# Default command
+# Default command to run your app
 CMD ["python", "db.py"]
+
