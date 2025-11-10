@@ -18,8 +18,10 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir \
         boto3 \
         psycopg2-binary \
-        watchdog
+        watchdog \
+        python-dotenv
 
 # Default command to run your app
 CMD ["python", "db.py"]
+
 
