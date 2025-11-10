@@ -29,7 +29,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to ECR
+    step:
+    - name: copying .env file to env
+      run: |
+          echo "Copying env to .env
+          cp env .env
+          
+     - name: Build, tag, and push image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: newuser-repo-123
