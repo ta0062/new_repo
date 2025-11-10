@@ -32,7 +32,6 @@ jobs:
       - name: Copy ENV  to .env
         run: |
           echo $ENV > .env
-          cat .env
           
       # - name: Build, tag, and push image to ECR
       #   env:
@@ -69,4 +68,4 @@ jobs:
       #       # Run the new container
       #       docker run -d --name newuser-container -p 80:80 ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
-            echo "✅ Deployment complete!"
+      #      echo "✅ Deployment complete!"
