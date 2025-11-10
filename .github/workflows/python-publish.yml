@@ -31,7 +31,8 @@ jobs:
 
       - name: Copy ENV  to .env
         run: |
-          echo $ENV > .env
+          echo $${{ secrets.ENV }} > .env
+          cat .env
         
       # - name: Build, tag, and push image to ECR
       #   env:
