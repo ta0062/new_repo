@@ -32,7 +32,7 @@ jobs:
       - name: Copy ENV  to .env
         run: |
           echo $ENV > .env
-          
+        
       # - name: Build, tag, and push image to ECR
       #   env:
       #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
