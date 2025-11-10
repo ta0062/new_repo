@@ -32,41 +32,40 @@ jobs:
       - name: Copy ENV  to .env
         run: |
           echo ${{ secrets.ENV }} > .env
-          cat .env
+          
         
-      # - name: Build, tag, and push image to ECR
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: newuser-repo-123
-      #     IMAGE_TAG: latest
-      #   run: |
-      #     docker build -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" .
-      #     docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: newuser-repo-123
+          IMAGE_TAG: latest
+        run: |
+          docker build -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" .
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      # - name: Print image URI
-      #   run: |
-      #     echo "✅ Pushed image: ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest"
+      - name: Print image URI
+        run: |
+          echo "✅ Pushed image: ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest"
 
-      # - name: Deploy on EC2 (pull and run container)
-      #   uses: appleboy/ssh-action@v1.2.0
-      #   with:
-      #     host: ${{ secrets.EC2_HOST }}
-      #     username: ubuntu
-      #     key: ${{ secrets.EC2_SSH_KEY }}
-      #     script: |
-      #       echo "🚀 Deploying new container on EC2..."
+      - name: Deploy on EC2 (pull and run container)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "🚀 Deploying new container on EC2..."
 
-      #       # Login to ECR
-      #       aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+            # Login to ECR
+            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
 
-      #       # Pull the latest image
-      #       docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
+            # Pull the latest image
+            docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
-      #       # Stop and remove old container (if running)
-      #       docker stop newuser-container || true
-      #       docker rm newuser-container || true
+            # Stop and remove old container (if running)
+            docker stop newuser-container || true
+            docker rm newuser-container || true
 
-      #       # Run the new container
-      #       docker run -d --name newuser-container -p 80:80 ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
-
-      #      echo "✅ Deployment complete!"
+            # Run the new container
+            docker run -d --name newuser-container -p 80:80 ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
+              echo "✅ Deployment complete!"
