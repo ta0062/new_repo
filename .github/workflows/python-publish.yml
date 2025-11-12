@@ -69,5 +69,5 @@ jobs:
             docker rm newuser-container || true
 
             # Run the new container
-            docker run -d --name newuser-container -p 80:80 ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
+            docker run -d --name c1 --network host ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
               echo "✅ Deployment complete!"
