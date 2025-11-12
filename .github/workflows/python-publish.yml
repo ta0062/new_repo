@@ -65,8 +65,8 @@ jobs:
             docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
             # Stop and remove old container (if running)
-            docker stop newuser-container || true
-            docker rm newuser-container || true
+            docker stop c1 || true
+            docker rm c1 || true
 
             # Run the new container
             docker run -d --name c1 --network host \
