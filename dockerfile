@@ -1,14 +1,27 @@
-# Use an official Python image
+# Use official Python image
 FROM python:3.10-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy all files
+# Install system dependencies required by psycopg2
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy your code into the container
 COPY . .
 
-# Install dependencies (if any)
-# RUN pip install -r requirements.txt
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir \
+        boto3 \
+        psycopg2-binary \
+        watchdog \
+        python-dotenv
 
-# Default command
-CMD ["python", "db.py"]
+# Default command to run your app
+CMD ["python","-u", "db.py"]
+
+
