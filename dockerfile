@@ -22,6 +22,6 @@ RUN pip install --no-cache-dir --upgrade pip \
         python-dotenv
 
 # Default command to run your app
-CMD ["python","u", "db.py"]
+CMD ["python","-u", "db.py"]
 
 
