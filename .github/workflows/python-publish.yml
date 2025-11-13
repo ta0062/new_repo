@@ -66,11 +66,11 @@ jobs:
             docker pull 417663442319.dkr.ecr.ap-south-1.amazonaws.com/newuser-repo-123:latest
             
             # Stop and remove old container (if running)
-            # docker stop c1 || true
-            # docker rm c1 || true
+            docker stop c2 || true
+            docker rm c2 || true
 
             # Run the new container
-            docker run -d --name c3 --network host \
+            docker run -d --name c2 --network host \
             -v /home/ubuntu/new_repo:/home/ubuntu/new_repo \
             ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
