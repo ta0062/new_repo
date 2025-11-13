@@ -3,7 +3,7 @@ name: Build, Push to ECR, and Deploy on EC2
 on:
   push:
     branches:
-      - master
+      - QA
 
 jobs:
   build-push-deploy:
