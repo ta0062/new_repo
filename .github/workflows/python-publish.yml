@@ -59,11 +59,12 @@ jobs:
             echo "🚀 Deploying new container on EC2..."
 
             # Login to ECR
-            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
-
+            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 417663442319.dkr.ecr.ap-south-1.amazonaws.com
+            
             # Pull the latest image
-            docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
-
+            # docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
+            docker pull newimage:latest 417663442319.dkr.ecr.ap-south-1.amazonaws.com/newimage:latest
+            
             # Stop and remove old container (if running)
             # docker stop c1 || true
             # docker rm c1 || true
