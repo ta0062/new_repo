@@ -3,7 +3,7 @@ name: Build, Push to ECR, and Deploy on EC2
 on:
   push:
     branches:
-      - master
+      - qa
 
 jobs:
   build-push-deploy:
@@ -33,7 +33,7 @@ jobs:
       
         run: |
         
-         echo "${{ secrets.ENV }}" > .env
+         echo "${{ secrets.NEWENV }}" > .env
           
         
       - name: Build, tag, and push image to ECR
@@ -65,11 +65,11 @@ jobs:
             docker pull ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
             # Stop and remove old container (if running)
-            docker stop c1 || true
-            docker rm c1 || true
+            # docker stop c1 || true
+            # docker rm c1 || true
 
             # Run the new container
-            docker run -d --name c1 --network host \
+            docker run -d --name c2 --network host \
             -v /home/ubuntu/new_repo:/home/ubuntu/new_repo \
             ${{ steps.login-ecr.outputs.registry }}/newuser-repo-123:latest
 
