@@ -7,27 +7,25 @@ on:
 
 jobs:
   build-push-deploy:
-    name: Build, push Docker image to ECR, then deploy on EC2
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List files in ansible directory
-        working-directory: ansible
+      - name: Verify WSL runner
+        run: |
+          uname -a
+          whoami
+          pwd
+
+      - name: Show repo structure
         run: ls -la
 
-
-
-
-
-
-
-
-
-
-
+      - name: List ansible files
+        run: |
+          cd ansible
+          ls -la
 
 # name: Build, Push to ECR, and Deploy on EC2
 
