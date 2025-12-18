@@ -8,7 +8,7 @@ on:
 jobs:
   build-push-deploy:
     name: Build, push Docker image to ECR, then deploy on EC2
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     permissions:
       contents: read
