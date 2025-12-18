@@ -1,4 +1,4 @@
-name: Build, Push to ECR, and Deploy on EC2
+name: Build, Push to ECR, and Deploy on EC2 (WSL Runner)
 
 on:
   push:
@@ -7,24 +7,32 @@ on:
 
 jobs:
   build-push-deploy:
+    name: Run CI/CD on WSL self-hosted runner
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify WSL runner
+      - name: Verify runner environment (WSL)
         run: |
-          uname -a
+          echo "User:"
           whoami
+          echo "OS:"
+          uname -a
+          echo "Current directory:"
           pwd
 
-      - name: Show repo structure
-        run: ls -la
-
-      - name: List ansible files
+      - name: Show repository files
         run: |
-          cd ansible
+          ls -la
+
+      - name: Go to local ansible directory on WSL
+        run: |
+          cd /home/tamoor/ansible
+          echo "Current path:"
+          pwd
+          echo "Listing ansible files:"
           ls -la
 
 # name: Build, Push to ECR, and Deploy on EC2
